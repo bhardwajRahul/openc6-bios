@@ -34,37 +34,35 @@ These hardware definitions are declared in `bios_core.h` and used across the ini
 The entry point of the HP-core is `bios_core_start()`. It runs a deterministic state machine to determine the target execution context.
 
 ```text
-       [ Power On / Reset ]
-                │
-                ▼
-   [ Legacy Wakeup Measurement ] (Before task delays)
-                │
-                ▼
-    [ Component Initialization ] (NVRAM, LED, WiFi, ME)
-                │
-                ▼
-  [ Network BIOS Update Check ] ──(Pending?)──► [ PXE BIOS OTA ]
-                │
-                ▼
-    [ CMOS Clear Jumper Check ] ──(Shorted?)──► [ Reset NVRAM ]
-                │
-                ▼
-       [ POST Verification ] ────(Failed?)────► [ System Halts / Rollback ]
-                │
-                ▼
-     [ Boot Selection Matrix ] ◄──(GPIO 9 Hold)
-                │
-    ┌───────────┼───────────────┬────────────────┐
-    ▼           ▼               ▼                ▼
-[Serial RAM] [Serial Flash] [PXE Net Boot] [Flash OS Boot]
-                │                                │
-                ▼                                │
-             (temporarily removed)               │
-                                       ┌─────────┴─────────┐
-                                       ▼                   ▼
-                                 [RAM Execution]   [XIP Flash Fallback]
-```
+                              [ Power On / Reset ]
+                                        │
+                                        ▼
+                          [ Legacy Wakeup Measurement ] (Before task delays)
+                                        │
+                                        ▼
+                          [ Component Initialization ] (NVRAM, LED, WiFi, ME)
+                                        │
+                                        ▼
+                         [ Network BIOS Update Check ] ──(Pending?)──► [ PXE BIOS OTA ]
+                                        │
+                                        ▼
+                          [ CMOS Clear Jumper Check ] ──(Shorted?)──► [ Reset NVRAM ]
+                                        │
+                                        ▼
+                              [ POST Verification ] ────(Failed?)────► [ System Halts / Rollback ]
+                                        │
+                                        ▼
+                            [ Boot Selection Matrix ] ◄──(GPIO 9 Hold)
+                                        │
+            ┌───────────────────────────┼───────────────────────────┬───────────────────────────┐
+            ▼                           ▼                           ▼                           ▼
+      [Serial RAM]              [UNIX Shell (FS)]            [PXE Net Boot]              [Flash OS Boot]
+                                                                                                │
+                                                                                    ┌───────────┴───────────┐
+                                                                                    ▼                       ▼
+                                                                             [RAM Execution]      [XIP Flash Fallback]
 
+```
 ### Key Boot Stages:
 
 1. **Legacy Wakeup Measurement:** Executed immediately before FreeRTOS scheduler context-delays. If waking up from deep sleep without the Management Engine (Legacy Mode), it measures how long the power button is held.
