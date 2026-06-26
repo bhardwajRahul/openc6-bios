@@ -50,7 +50,7 @@ compiler flag USE_EXTERNAL_CP2102:
 The receiver employs a lightweight packet-less streaming protocol with
 byte-level flow control:
 
-    Host PC (Python script)                       OpenC6 BIOS
+    Host PC (C binary)                            OpenC6 BIOS
              │ ◄────────── "##OPENC6_SYNC##" ──────────┤ (Sent every 500ms)
              ├───────── Preamble [0x5A, 0xA5] ────────►│
              ├──────── Size Bytes [4-Byte LE] ────────►│
