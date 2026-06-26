@@ -38,7 +38,9 @@ To overcome the single-sector file size limit (4 KB), large files are automatica
 * The maximum payload size in a single chunk is **4064 bytes** (`SECTOR_SIZE (4096) - sizeof(RecordHeader) (32)`).
 * If a chunk does not fit within the current sector, the remaining space is padded with an `FS_MAGIC_SKIP` record, and the next chunk starts clean at the beginning of the next sector. This ensures no record header or payload crosses a physical sector boundary.
 * The total file size is calculated based on the highest recorded chunk index using the formula:
-  $$\text{File Size} = (\text{chunk\_idx} \times 4064) + \text{data\_len\_of\_highest\_chunk}$$
+```text
+File Size = (chunk_idx * 4064) + data_len_of_highest_chunk
+```
 
 ### Dynamic RAM Indexing
 To avoid scanning the physical flash during directory traversal or file lookups, the system maintains a flat in-memory index (`g_nodes`) in RAM.
