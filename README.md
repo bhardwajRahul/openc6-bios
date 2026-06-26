@@ -4,6 +4,12 @@
 [![Hardware: ESP32-C6](https://img.shields.io/badge/Hardware-ESP32--C6-red.svg)](https://www.espressif.com/en/products/socs/esp32-c6)
 [![Architecture: RISC-V](https://img.shields.io/badge/Architecture-RISC--V-orange.svg)](https://riscv.org/)
 
+<p align="center">
+  <a href="https://trendshift.io/repositories/54987?utm_source=trendshift-badge&utm_medium=badge&utm_campaign=badge-trendshift-54987" target="_blank" rel="noopener noreferrer">
+    <img src="https://trendshift.io/api/badge/trendshift/repositories/54987/daily?language=C" alt="Rompass/openc6-bios | Trendshift" width="250" height="55"/>
+  </a>
+</p>
+
 OpenC6 BIOS is an open-source, high-performance modular platform (BIOS) for the ESP32-C6 (RISC-V) microcontroller. It decouples hardware initialization from application logic, bringing a PC/Server-like architecture to microcontrollers.
 
 Instead of monolithic firmwares, OpenC6 acts as a host platform. It initializes the hardware, provides out-of-band management via an independent LP-Core coprocessor, and exposes a standardized System Call Interface (ABI). This allows you to hot-swap, download, and execute bare-metal Payloads directly into RAM or Execute-In-Place (XIP) Flash.
@@ -13,7 +19,7 @@ Instead of monolithic firmwares, OpenC6 acts as a host platform. It initializes 
 ## Visual Demos
 
 ### 1. Retro Web Setup Utility (1280x1024 5:4 Native Look)
-Experience the nostalgic interface of classic PC BIOS, fully running on the ESP32-C6 and accessible via local Wi-Fi.
+Nostalgic classic PC BIOS running on ESP32-C6 via local Wi-Fi.
 ![OpenC6 Web UI Setup](docs/assets/web_setup.gif)
 
 ### 2. Micro UNIX Shell (Interactive File System Explorer)
